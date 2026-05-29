@@ -8,12 +8,17 @@ namespace Player
     {
         public float interactDistance;
         public LayerMask interactableLayer;
+        private GameObject _prefabWithInterface;
+
 
         void Update()
         {
             if (Keyboard.current.pKey.wasPressedThisFrame)
             {
                 PerformInteraction();
+                Spawn(this.transform);
+
+
             }
         }
 
@@ -29,6 +34,14 @@ namespace Player
             }
         }
 
+        public void Spawn(Transform parent)
+        {
+            ISpawnable spawnable = _prefabWithInterface.GetComponent<ISpawnable>();
 
+            if (spawnable != null)
+            {
+                spawnable.Spawn(this.transform);
+            }
+        }
     }
 }

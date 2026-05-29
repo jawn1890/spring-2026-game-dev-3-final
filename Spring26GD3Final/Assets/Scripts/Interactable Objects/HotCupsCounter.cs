@@ -1,5 +1,6 @@
 using Interactable_Objects.Interface;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 
 namespace Interactable_Objects
