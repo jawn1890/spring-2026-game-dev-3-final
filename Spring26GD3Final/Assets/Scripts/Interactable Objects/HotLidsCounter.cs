@@ -5,10 +5,25 @@ namespace Interactable_Objects
 {
     public class HotLidsCounter : MonoBehaviour, IInteractable
     {
+        public GameObject prefabToSpawn;
+        private GameObject _currentInstance;
+        public Transform spawnPoint;
+
         public void Interact()
         {
-            Debug.Log("This will 'cap' the player's full cup that they're holding and make it a 'complete' drink!");
-            //Actual logic for 'capping' cup will go here. Specific to the object, independent of any other scripts.
+            //Your actual logic for this particular counter goes here. It's specific to the item.
+            ReplacePrefab();
+        }
+
+        void ReplacePrefab()
+        {
+            if (_currentInstance != null)
+            {
+                Destroy(_currentInstance);
+            }
+            _currentInstance = Instantiate(prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
+            _currentInstance.transform.SetParent(spawnPoint);
+
         }
     }
 }

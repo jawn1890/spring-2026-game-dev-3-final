@@ -1,17 +1,29 @@
 using Interactable_Objects.Interface;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
-
 
 namespace Interactable_Objects
 {
     public class HotCupsCounter : MonoBehaviour, IInteractable
     {
-        
+        public GameObject prefabToSpawn;
+        private GameObject _currentInstance;
+        public Transform spawnPoint;
+
         public void Interact()
         {
-            Debug.Log("This will 'give' the player an empty cup!");
-            //The rest of your actual logic for this particular counter goes here. It's specific to the item.
+            //Your actual logic for this particular counter goes here. It's specific to the item.
+            ReplacePrefab();
+        }
+
+        void ReplacePrefab()
+        {
+            if (_currentInstance != null)
+            {
+                Destroy(_currentInstance);
+            }
+
+            _currentInstance = Instantiate(prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
+            _currentInstance.transform.SetParent(spawnPoint);
         }
     }
 }

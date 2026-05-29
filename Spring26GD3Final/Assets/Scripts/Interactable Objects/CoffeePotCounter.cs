@@ -5,11 +5,24 @@ namespace Interactable_Objects
 {
     public class CoffeePotCounter : MonoBehaviour, IInteractable
     {
+        public GameObject prefabToSpawn;
+        private GameObject _currentInstance;
+        public Transform spawnPoint;
 
         public void Interact()
         {
-            Debug.Log("This will 'fill' the player's empty cup that they're holding!");
-            //Actual logic for 'filling' cup will go here. Specific to the object, independent of any other scripts.
+            //Your actual logic for this particular counter goes here. It's specific to the item.
+            ReplacePrefab();
+        }
+
+        void ReplacePrefab()
+        {
+            if (_currentInstance != null)
+            {
+                Destroy(_currentInstance);
+            }
+            _currentInstance = Instantiate(prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
+            _currentInstance.transform.SetParent(spawnPoint);
         }
     }
 }
